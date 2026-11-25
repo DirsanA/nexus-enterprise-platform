@@ -1,9 +1,11 @@
+import Navbar from "./componets/Navbar.jsx"
+import { BrowserRouter as Router } from "react-router-dom"
 function App(){
 
   return(
-    <div>
-      <h1>Welcome to Nexus</h1>
-    </div>  
+   <Router>
+    <Navbar />
+   </Router>
   )
 }
 
