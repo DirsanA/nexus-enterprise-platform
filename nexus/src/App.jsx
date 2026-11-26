@@ -1,12 +1,36 @@
-import Navbar from "./componets/Navbar.jsx"
-import { BrowserRouter as Router } from "react-router-dom"
-function App(){
+import {useState} from "react";
 
-  return(
-   <Router>
-    <Navbar />
-   </Router>
-  )
-}
+function  App(){
+    let [count,setCount]=useState(0)
 
-export default App;
+    function increment(){
+        setCount(count+1)
+    }
+
+    function deacrment(){
+        setCount(count-1)
+    }
+    function reset(){
+        setCount(0)
+    }
+
+    return(
+        <div>
+            <div>
+                count={count}
+            </div>
+        <button onClick={deacrment}>
+            deacrment
+        </button>
+
+            <button onClick={increment}>
+                Increase
+            </button>
+
+            <button onClick={reset}>
+            reset
+            </button>
+        </div>
+    )
+
+}export default App
