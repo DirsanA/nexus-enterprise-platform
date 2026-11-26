@@ -1,16 +1,42 @@
+import { useEffect, useState } from "react";
+
+
 function App() {
 
-  let products = ["phone", "laptop"]
+  let [data, setdata] = useState([])
 
-  function addProduct() {
-    products.push("charger")
+  async function featchUser() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users")
+    const data = await response.json()
+    if (data) {
+      console.log(data)
+      setdata(data)
+    }
+
+    console.log("user not found ")
+
   }
+  useEffect(function () {
+    featchUser()
+  }, [])
 
   return (
     <div>
-      <button className="btn btn-primary" onClick={addProduct}>Add Product</button>
+   // featchUser
+      <h1>Users</h1>
+      {
+        data.map(function (data) {
+          return (
+            <div key={data.id}>
+              <p>{data.name} </p>
+              <p>{data.username}</p>
+              <p>{data.email}</p>
+            </div>
+          )
+        })
+      }
     </div>
   )
 
-}
-export default App
+
+} export default App

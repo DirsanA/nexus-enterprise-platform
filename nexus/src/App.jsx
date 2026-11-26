@@ -1,36 +1,42 @@
-import {useState} from "react";
+import { useEffect, useState } from "react";
 
-function  App(){
-    let [count,setCount]=useState(0)
 
-    function increment(){
-        setCount(count+1)
+function App() {
+
+    let [data, setdata] = useState([])
+
+    async function featchUser() {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users")
+        const data = await response.json()
+        if (data) {
+            console.log(data)
+            setdata(data)
+        }
+
+        console.log("user not found ")
+
     }
+    useEffect(function () {
+        featchUser()
+    }, [])
 
-    function deacrment(){
-        setCount(count-1)
-    }
-    function reset(){
-        setCount(0)
-    }
-
-    return(
+    return (
         <div>
-            <div>
-                count={count}
-            </div>
-        <button onClick={deacrment}>
-            deacrment
-        </button>
-
-            <button onClick={increment}>
-                Increase
-            </button>
-
-            <button onClick={reset}>
-            reset
-            </button>
+            // featchUser
+            <h1>Users</h1>
+            {
+                data.map(function (data) {
+                    return (
+                        <div key={data.id}>
+                            <p>{data.name} </p>
+                            <p>{data.username}</p>
+                            <p>{data.email}</p>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 
-}export default App
+
+} export default App
